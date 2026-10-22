@@ -1,0 +1,22 @@
+# ==============================================================================
+# Quantum Secret Sharing (QSS) - Package Requirements
+#
+# To install all required packages all at once, run this command in your terminal:
+#
+#   pip install -r requirements.txt
+#
+# Or alternatively, run using Python directly:
+#
+#   python -m pip install -r requirements.txt
+#
+# ==============================================================================
+
+qiskit>=1.0.0
+qiskit-aer>=0.14.0
+rich>=13.0.0
+numpy>=1.24.0
+pytest>=8.0.0
+streamlit>=1.30.0
+plotly>=5.0.0
+matplotlib>=3.8.0
+pylatexenc>=2.11
