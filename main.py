@@ -1,5 +1,6 @@
 """
 Quantum Secret Sharing (QSS) - Project Demonstration
+====================================================
 Runs the full suite of simulations:
 1. Standard HBB Protocol
 2. Eavesdropping Attacks (IR and EM)
@@ -7,9 +8,15 @@ Runs the full suite of simulations:
 Outputs formatted results consistent with the project report.
 """
 
-from qss_protocol import simulate_qss, parse_qss_counts
-from qss_attacks import simulate_intercept_resend, simulate_entangle_measure
-from qss_error_correction import simulate_qss_error_correction
+import sys
+from pathlib import Path
+
+# Ensure src/ is on Python module search path
+sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
+
+from qss.protocol import simulate_qss, parse_qss_counts
+from qss.attacks import simulate_intercept_resend, simulate_entangle_measure
+from qss.error_correction import simulate_qss_error_correction
 
 
 def run_demonstration(shots: int = 1000) -> None:

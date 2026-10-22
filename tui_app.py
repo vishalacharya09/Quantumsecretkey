@@ -16,6 +16,7 @@ import sys
 import time
 import random
 import argparse
+from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 
@@ -26,6 +27,9 @@ if hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
+# Ensure src/ is on Python module search path
+sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
+
 from rich.console import Console
 from rich.layout import Layout
 from rich.panel import Panel
@@ -34,9 +38,9 @@ from rich.text import Text
 from rich.align import Align
 from rich.live import Live
 
-from qss_protocol import simulate_qss, parse_qss_counts
-from qss_attacks import simulate_intercept_resend, simulate_entangle_measure
-from qss_error_correction import simulate_qss_error_correction
+from qss.protocol import simulate_qss, parse_qss_counts
+from qss.attacks import simulate_intercept_resend, simulate_entangle_measure
+from qss.error_correction import simulate_qss_error_correction
 
 # Try importing msvcrt for non-blocking keypress on Windows
 try:

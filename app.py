@@ -8,20 +8,25 @@ Veermata Jijabai Technological Institute (VJTI), Mumbai
 """
 
 import math
+import sys
+from pathlib import Path
 import numpy as np
 import streamlit as st
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 
-from qss_protocol import create_qss_circuit, simulate_qss, parse_qss_counts
-from qss_attacks import (
+# Ensure src/ is on Python module search path
+sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
+
+from qss.protocol import create_qss_circuit, simulate_qss, parse_qss_counts
+from qss.attacks import (
     create_intercept_resend_circuit,
     create_entangle_measure_circuit,
     simulate_intercept_resend,
     simulate_entangle_measure,
     calculate_attack_error_rate
 )
-from qss_error_correction import (
+from qss.error_correction import (
     create_qss_error_correction_circuit,
     simulate_qss_error_correction,
     calculate_ec_error_rate

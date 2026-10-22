@@ -65,16 +65,26 @@ q3 (Charlie) ───────────────X───────
 ## 3. Project File Structure
 
 ```
-├── qss_protocol.py            # Core HBB 4-qubit protocol implementation & simulation
-├── qss_attacks.py             # Intercept-and-Resend & Entangle-and-Measure simulations
-├── qss_error_correction.py    # 6-qubit circuit with 3-qubit Toffoli error correction
-├── main.py                    # Formatted terminal demonstration script
-├── tui_app.py                 # Rich Terminal User Interface (Quantum Sentinel)
-├── test_qss.py                # Unit tests for core protocol & arbitrary states
-├── test_attacks.py            # Unit tests for eavesdropping detection
-├── test_error_correction.py   # Unit tests for bit-flip correction
-├── requirements.txt           # Dependency specifications
-└── README.md                  # Project documentation & report overview
+Quantum-Secret-Sharing/
+├── src/
+│   └── qss/
+│       ├── __init__.py           # Package exports & metadata
+│       ├── protocol.py           # Core HBB 4-qubit protocol implementation & simulation
+│       ├── attacks.py            # Intercept-and-Resend & Entangle-and-Measure simulations
+│       └── error_correction.py   # 6-qubit circuit with 3-qubit Toffoli error correction
+├── tests/
+│   ├── __init__.py
+│   ├── test_protocol.py          # Unit tests for core protocol & arbitrary states
+│   ├── test_attacks.py           # Unit tests for eavesdropping detection
+│   └── test_error_correction.py  # Unit tests for bit-flip correction
+├── app.py                        # Streamlit web dashboard entry point
+├── tui_app.py                    # Rich Terminal User Interface ("Quantum Sentinel")
+├── main.py                       # Demonstration CLI runner script
+├── run_app.bat                   # Convenient Windows launcher script
+├── pytest.ini                    # Pytest discovery configuration
+├── requirements.txt              # Dependency specifications
+├── .gitignore                    # Version control exclusions
+└── README.md                     # Project documentation & report overview
 ```
 
 ---

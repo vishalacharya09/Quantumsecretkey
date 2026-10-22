@@ -1,10 +1,10 @@
 """
-Unit Tests for 3-Qubit Bit-Flip Error Correction (qss_error_correction.py)
+Unit Tests for 3-Qubit Bit-Flip Error Correction
 """
 
 import numpy as np
 import pytest
-from qss_error_correction import (
+from qss.error_correction import (
     create_qss_error_correction_circuit,
     simulate_qss_error_correction,
     calculate_ec_error_rate
@@ -25,7 +25,6 @@ def test_error_correction_circuit_structure():
 
 def test_bit_flip_correction_reconstructed_qubit():
     """Verify that Toffoli majority-vote decoder corrects 100% of bit-flip noise on q5."""
-    # With correction: error rate must be 0.0%
     counts, err_rate = simulate_qss_error_correction(
         inject_bit_flip=True,
         error_qubit=5,
@@ -34,7 +33,6 @@ def test_bit_flip_correction_reconstructed_qubit():
     )
     assert err_rate == 0.0, f"Expected 0.0 error rate with correction, got {err_rate}"
 
-    # Without correction: error rate must be significantly elevated
     counts_uncorrected, raw_err = simulate_qss_error_correction(
         inject_bit_flip=True,
         error_qubit=5,
@@ -68,7 +66,6 @@ def test_no_noise_baseline():
 
 def test_calculate_ec_error_rate_helper():
     """Verify helper with synthetic counts."""
-    # Format: cr_c cr_b cr_a1 cr_a0
     synthetic = {
         "0 0 0 0": 80,  # cr_c = 0 (success)
         "1 0 0 0": 20,  # cr_c = 1 (error)

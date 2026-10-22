@@ -1,10 +1,10 @@
 """
-Unit Tests for Core HBB Quantum Secret Sharing Protocol (qss_protocol.py)
+Unit Tests for Core HBB Quantum Secret Sharing Protocol
 """
 
 import numpy as np
 import pytest
-from qss_protocol import create_qss_circuit, simulate_qss, parse_qss_counts
+from qss.protocol import create_qss_circuit, simulate_qss, parse_qss_counts
 
 
 def test_circuit_structure():

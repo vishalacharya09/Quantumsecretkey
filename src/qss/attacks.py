@@ -1,5 +1,6 @@
 """
 Quantum Secret Sharing (QSS) - Security Attack Simulations
+==========================================================
 Simulations of canonical eavesdropping strategies against the HBB protocol:
 1. Intercept-and-Resend (IR) Attack:
    Eve intercepts Bob's GHZ qubit during distribution, measures it in the computational
@@ -7,7 +8,7 @@ Simulations of canonical eavesdropping strategies against the HBB protocol:
 2. Entangle-and-Measure (EM) Attack:
    Eve introduces an ancilla qubit and entangles it with Charlie's GHZ qubit via CNOT.
    Eve later measures her ancilla to extract correlated information.
-   
+
 Both attacks disturb the quantum state, inducing a statistically detectable ~25% error
 rate in verification, confirming quantum unconditional security (No-Cloning Theorem).
 """
@@ -25,8 +26,6 @@ def create_intercept_resend_circuit(
 ) -> QuantumCircuit:
     """
     Constructs an HBB circuit under an Intercept-and-Resend (IR) attack by Eve.
-    
-    Eve intercepts Bob's GHZ qubit qr[2] after preparation, measuring it into cr_eve.
     """
     qr = QuantumRegister(4, 'q')
     cr_a0 = ClassicalRegister(1, 'cr_a0')
@@ -43,7 +42,7 @@ def create_intercept_resend_circuit(
     qc.barrier()
 
     # Eavesdropping: Eve intercepts and measures Bob's qubit qr[2]
-    qc.measure(qr[2], cr_eve[0])  # Entanglement destroyed; qr[2] collapses to |0> or |1>
+    qc.measure(qr[2], cr_eve[0])  # Entanglement destroyed
     qc.barrier()
 
     # Phase 2: Alice encodes the secret qubit
@@ -81,9 +80,6 @@ def create_entangle_measure_circuit(
 ) -> QuantumCircuit:
     """
     Constructs an HBB circuit under an Entangle-and-Measure (EM) attack by Eve.
-    
-    Eve introduces a 5th ancilla qubit qr[4] and couples it to Charlie's GHZ qubit qr[3].
-    Eve later measures qr[4] into cr_eve.
     """
     qr = QuantumRegister(5, 'q')  # qr[4] is Eve's ancilla
     cr_a0 = ClassicalRegister(1, 'cr_a0')
@@ -137,12 +133,9 @@ def create_entangle_measure_circuit(
 def calculate_attack_error_rate(counts: Dict[str, int]) -> Tuple[int, int, float]:
     """
     Calculates the error rate induced by eavesdropping.
-    
-    In both IR and EM circuits:
-        Register list: [qr, cr_a0, cr_a1, cr_b, cr_c, cr_eve]
-        Bitstring representation: "cr_eve cr_c cr_b cr_a1 cr_a0"
-        cr_c is index 1 from left in space-separated tokens.
-        cr_c == '1' indicates a failed verification (eavesdropping error).
+
+    Bitstring representation: "cr_eve cr_c cr_b cr_a1 cr_a0"
+    cr_c is index 1 from left. cr_c == '1' indicates an error.
 
     Returns:
         Tuple of (error_shots, total_shots, error_rate)
@@ -155,9 +148,8 @@ def calculate_attack_error_rate(counts: Dict[str, int]) -> Tuple[int, int, float
         if len(tokens) >= 2:
             cr_c_val = tokens[1]
         else:
-            # Fallback if unseparated
             cr_c_val = bitstring[1] if len(bitstring) > 1 else bitstring[0]
-            
+
         if cr_c_val == '1':
             error_shots += count
 

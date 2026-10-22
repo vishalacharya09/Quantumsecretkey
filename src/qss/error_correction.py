@@ -1,5 +1,6 @@
 """
 Quantum Secret Sharing (QSS) - 3-Qubit Bit-Flip Error Correction
+================================================================
 Implements a 3-qubit repetition code using a Toffoli (CCX) majority-vote decoder
 to protect the transmitted quantum secret against bit-flip channel noise.
 
@@ -15,7 +16,7 @@ Guarantees 100% mitigation of single-qubit bit-flip errors, reducing error rate 
 down to 0.0% residual error.
 """
 
-from typing import Dict, Tuple, Optional
+from typing import Dict, Tuple
 import numpy as np
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit_aer import AerSimulator
@@ -31,12 +32,6 @@ def create_qss_error_correction_circuit(
 ) -> QuantumCircuit:
     """
     Constructs the 6-qubit QSS circuit with 3-qubit bit-flip error correction.
-
-    Args:
-        theta, phi, lambda_param: Secret state preparation angles.
-        inject_bit_flip: Whether to inject an X bit-flip channel error.
-        error_qubit: Target qubit for error injection (5, 1, or 2).
-        apply_correction: Whether to apply the syndrome computation & Toffoli decoder.
     """
     qr = QuantumRegister(6, 'q')
     cr_a0 = ClassicalRegister(1, 'cr_a0')
@@ -104,13 +99,6 @@ def create_qss_error_correction_circuit(
 def calculate_ec_error_rate(counts: Dict[str, int]) -> Tuple[int, int, float]:
     """
     Calculates the error rate after verification for the error-correction circuit.
-    
-    Bitstring representation: "cr_c cr_b cr_a1 cr_a0"
-    cr_c is the first space-separated token.
-    cr_c == '1' indicates an uncorrected reconstruction error.
-
-    Returns:
-        Tuple of (error_shots, total_shots, error_rate)
     """
     total_shots = sum(counts.values())
     error_shots = 0

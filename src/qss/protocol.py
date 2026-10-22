@@ -1,5 +1,6 @@
 """
 Quantum Secret Sharing (QSS) - Core HBB Protocol
+================================================
 Implementation of the Hillery-Bužek-Berthiaume (HBB) 3-party protocol.
 
 Alice (secret sender) distributes a GHZ-entangled state among Alice, Bob, and Charlie.
@@ -101,7 +102,7 @@ def simulate_qss(
 def parse_qss_counts(counts: Dict[str, int]) -> Tuple[int, int, float]:
     """
     Parses simulation counts to extract the verification bit cr_c.
-    
+
     In Qiskit's multi-register string representation:
         String format: "cr_c cr_b cr_a1 cr_a0"
         cr_c is the leftmost space-separated token.

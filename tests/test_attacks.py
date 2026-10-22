@@ -1,10 +1,10 @@
 """
-Unit Tests for Security Attack Simulations (qss_attacks.py)
+Unit Tests for Security Attack Simulations
 """
 
 import numpy as np
 import pytest
-from qss_attacks import (
+from qss.attacks import (
     create_intercept_resend_circuit,
     create_entangle_measure_circuit,
     simulate_intercept_resend,
@@ -37,7 +37,6 @@ def test_ir_attack_detectable_disturbance():
     """Verify that Intercept-and-Resend attack induces detectable error rate (~25%)."""
     counts, err_rate = simulate_intercept_resend(shots=1500)
     assert 0.18 <= err_rate <= 0.32, f"IR Error rate {err_rate:.3f} outside expected range [0.18, 0.32]"
-    # Must comfortably exceed the security alert threshold of 15%
     assert err_rate > 0.15
 
 
@@ -45,13 +44,11 @@ def test_em_attack_detectable_disturbance():
     """Verify that Entangle-and-Measure attack induces detectable error rate (~25%)."""
     counts, err_rate = simulate_entangle_measure(shots=1500)
     assert 0.18 <= err_rate <= 0.32, f"EM Error rate {err_rate:.3f} outside expected range [0.18, 0.32]"
-    # Must comfortably exceed the security alert threshold of 15%
     assert err_rate > 0.15
 
 
 def test_calculate_attack_error_rate_helper():
     """Verify attack error rate parser with synthetic bitstrings."""
-    # Format: cr_eve cr_c cr_b cr_a1 cr_a0
     synthetic = {
         "0 1 0 0 0": 25,  # cr_c = 1 (error)
         "1 1 0 1 0": 25,  # cr_c = 1 (error)
