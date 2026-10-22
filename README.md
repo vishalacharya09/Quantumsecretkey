@@ -2,12 +2,7 @@
 
 **Hillery-Bužek-Berthiaume (HBB) Protocol with Eavesdropping Detection & 3-Qubit Error Correction**
 
-- **Student:** Vishal Acharya (Roll No.: 231070077)
-- **Department:** Computer Engineering | Quantum Computing Laboratory
-- **Institute:** Veermata Jijabai Technological Institute (VJTI), Mumbai
-- **Stack:** Python 3.11+, Qiskit ≥1.0, Qiskit-Aer ≥0.14.0, Rich, NumPy, pytest
 
----
 
 ## 1. Project Overview
 
